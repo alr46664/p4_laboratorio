@@ -1,0 +1,54 @@
+{
+  "target": "bmv2",
+  "p4info": "build/p4_laboratorio.p4info",
+  "bmv2_json": "build/p4_laboratorio.json",
+  "table_entries": [
+    {
+      "table": "MyIngress.ethernet_lpm",
+      "default_action": true,
+      "action_name": "drop",
+      "action_params": { }
+    },    
+    {
+      "table": "MyIngress.ethernet_lpm",
+      "match": {
+        "hdr.ethernet.dstAddr": ["FF:FF:FF:FF:FF:FF"]
+      },
+      "action_name": "MyIngress.eth_broadcast",
+      "action_params": { }
+    },
+    {
+      "table": "MyIngress.ethernet_lpm",
+      "match": {
+        "hdr.ethernet.dstAddr": ["00:00:00:00:01:01"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": {
+        "dstAddr": "00:00:00:00:01:01",
+        "port": 1
+      }
+    },
+    {
+      "table": "MyIngress.ethernet_lpm",
+      "match": {
+        "hdr.ethernet.dstAddr": ["00:00:00:00:01:02"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": {
+        "dstAddr": "00:00:00:00:01:02",
+        "port": 2
+      }
+    },
+    {
+      "table": "MyIngress.ethernet_lpm",
+      "match": {
+        "hdr.ethernet.dstAddr": ["00:00:00:00:01:03"]
+      },
+      "action_name": "MyIngress.eth_forward",
+      "action_params": {
+        "dstAddr": "00:00:00:00:01:03",
+        "port": 3
+      }
+    }
+  ]
+}
